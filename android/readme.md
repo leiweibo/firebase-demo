@@ -1,0 +1,1 @@
+1. Setup the firestore setup base [setup](https://firebase.google.com/docs/firestore/quickstart)
