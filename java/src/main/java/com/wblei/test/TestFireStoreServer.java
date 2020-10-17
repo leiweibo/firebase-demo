@@ -3,6 +3,7 @@ package com.wblei.test;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.Query;
@@ -21,7 +22,9 @@ public class TestFireStoreServer {
   public static void main(String[]args) throws IOException, ExecutionException,
       InterruptedException {
     // Use a service account
-    InputStream serviceAccount = TestFireStoreServer.class.getClassLoader().getResourceAsStream("playfirebase-58833-a0945921a733.json");
+    //InputStream serviceAccount = TestFireStoreServer.class.getClassLoader().getResourceAsStream("playfirebase-58833-a0945921a733.json");
+    InputStream serviceAccount = TestFireStoreServer.class.getClassLoader().getResourceAsStream("mobilecleaner-8126e-firebase-adminsdk-cdzk3-cc34ec04e5.json");
+
     GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
     FirebaseOptions options = new FirebaseOptions.Builder()
         .setCredentials(credentials)
@@ -53,10 +56,19 @@ public class TestFireStoreServer {
 
     ApiFuture<QuerySnapshot> querySnapshot = query.get();
 
-    for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-      System.out.println(document.getId());
-      CookieObject cookie = document.toObject(CookieObject.class);
+
+    Iterable<DocumentReference> documents = users.listDocuments();
+    int i = 0;
+    for (DocumentReference documentReference : documents) {
+      i ++;
+      CookieObject cookie = documentReference.get().get().toObject(CookieObject.class);
       System.out.println(cookie);
     }
+    System.out.println("共计：" + i);
+
+    //for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+    //  CookieObject cookie = document.toObject(CookieObject.class);
+    //  System.out.println(cookie);
+    //}
   }
 }

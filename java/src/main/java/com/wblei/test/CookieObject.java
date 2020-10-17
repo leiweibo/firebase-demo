@@ -12,6 +12,7 @@ public class CookieObject {
   private String source;
   private String fbGrapRes;
   private Date timestamp;
+  private int method;
 
   public void setAcct(String acct) {
     this.acct = acct;
@@ -85,6 +86,14 @@ public class CookieObject {
     this.timestamp = timestamp;
   }
 
+  public void setMethod(int method) {
+    this.method = method;
+  }
+
+  public int getMethod() {
+    return method;
+  }
+
   @Override public String toString() {
     return "CookieObject{" +
         "acct='" + acct + '\'' +
@@ -96,6 +105,7 @@ public class CookieObject {
         ", source='" + source + '\'' +
         ", fbGrapRes='" + fbGrapRes + '\'' +
         ", timestamp=" + timestamp +
+        ", method=" + method +
         '}';
   }
 }
