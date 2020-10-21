@@ -1,5 +1,6 @@
 **/.idea
 **/play*.json
+**/resources/*.json
 target
 **/*.iml
 **/.DS_Store
